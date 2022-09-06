@@ -1,0 +1,46 @@
+
+#include <string>
+using namespace std
+
+int romanToInt(string);
+
+int main() {
+    
+    cout << romanToInt("XXV") << endl;
+}
+int romanToInt(string s) {
+
+    int somme {0};
+    // allow to treat the case of nine and four IV = 4 and IX =9 XL = 40 XC = 90 CD=400 CM=900
+    char previous = ' ';
+    for(auto i: s){           
+        switch(i){                   
+            case 'I':
+                somme += 1;
+                break;
+            case 'V':
+                somme = (previous == 'I') ? somme + 3 : somme + 5;
+                break;
+            case 'X':
+                somme = (previous == 'I') ? somme + 8 : somme + 10;
+                break;
+            case 'L':
+                somme = (previous == 'X') ? somme + 30 : somme + 50;
+                break;
+            case 'C':
+                somme = (previous == 'X') ? somme + 80 : somme + 100;
+                break;      
+            case 'D':
+                somme = (previous == 'C') ? somme + 300 : somme + 500;
+                break;     
+            case 'M':
+                somme = (previous == 'C') ? somme + 800 : somme + 1000;
+                break;  
+            default:
+                break;
+        }
+        previous = i;    
+    }
+
+    return somme;
+}
